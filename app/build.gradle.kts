@@ -1,14 +1,15 @@
 import kotlin.io.println
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
 
-tasks.register("hello") {
-    println("hello  ${project.name}") // 当前 module
-    println("hello  ${project.parent?.name}") // 父级
-}
+//tasks.register("hello") {
+//    println("hello  ${project.name}") // 当前 module
+//    println("hello  ${project.parent?.name}") // 父级
+//}
+
+apply<CustomPlugin>()
 
 android {
     compileSdk = 31
