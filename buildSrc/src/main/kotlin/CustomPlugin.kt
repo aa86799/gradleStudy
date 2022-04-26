@@ -1,6 +1,7 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.register
+import  com.android.build.api.variant.ApplicationAndroidComponentsExtension
 
 class CustomPlugin : Plugin<Project> {
 
@@ -29,6 +30,37 @@ class CustomPlugin : Plugin<Project> {
                 println("Hello from the GreetingPlugin. First")
             }
         }
+
+        addVariant(project, "staging")
     }
 
+    // 添加构建变体
+    private fun addVariant(project: Project, variantName: String) {
+        val extension = project.extensions.getByName(
+            "androidComponents"
+        ) as ApplicationAndroidComponentsExtension
+
+        // finalizeDsl, 在 DSL 对象应用于 Variant 创建前对它们进行修改
+        // 在阶段结束时，AGP 将会锁定 DSL 对象，这样它们就无法再被更改
+        extension.finalizeDsl { ext->
+            println("finalizeDsl")
+            ext.buildTypes.create(variantName).let { buildType ->
+                buildType.initWith(ext.buildTypes.getByName("debug"))
+                buildType.manifestPlaceholders["hostName"] = "example.com"
+                buildType.applicationIdSuffix = ".debug$variantName"
+                buildType.isDebuggable = true
+                buildType.isShrinkResources = false // 是否压缩资源
+                buildType.isMinifyEnabled = false // 是否混淆
+            }
+        }
+
+        extension.beforeVariants { variantBuilder ->
+            println("beforeVariants ${variantBuilder.name}")
+            if (variantBuilder.name == variantName) {
+                variantBuilder.enableUnitTest = false
+                variantBuilder.minSdk = 23
+            }
+        }
+
+    }
 }
