@@ -10,6 +10,7 @@ plugins {
 //}
 
 apply<CustomPlugin>()
+apply<gitversion.GitVersionPlugin>()
 
 android {
     compileSdk = 31
@@ -78,14 +79,14 @@ android {
     // }
 
     // 构建变体，方式3
-    androidComponents {
-        finalizeDsl { ext ->
-            ext.buildTypes.create("")
-        }
-        beforeVariants { variantBuilder ->
-
-        }
-    }
+    // androidComponents {
+    //     finalizeDsl { ext ->
+    //         ext.buildTypes.create("")
+    //     }
+    //     beforeVariants { variantBuilder ->
+    //
+    //     }
+    // }
 }
 
 dependencies {
