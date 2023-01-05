@@ -7,14 +7,14 @@
 //     }
 //
 //     dependencies {
-//         classpath("com.android.tools.build:gradle:7.2.0-rc01")
-//         classpath(kotlin("gradle-plugin", version = "1.6.20"))
+//         classpath("com.android.tools.build:gradle:7.3.1")
+//         classpath(kotlin("gradle-plugin", version = "1.7.20"))
 //     }
 // }
 
 plugins {
     `kotlin-dsl` // 使用这个后  buildSrc/src/main/kotlin 才成为源码目录
-    kotlin("jvm") version("1.6.20")
+    kotlin("jvm") version("1.7.20")
     java
 }
 
@@ -24,13 +24,13 @@ repositories { // project 所需的 repos
 }
 
 dependencies { // project 所需的 depends
-    implementation("com.android.tools.build:gradle-api:7.2.0-rc01")
-    implementation(kotlin("stdlib", version = "1.6.20"))
+    implementation("com.android.tools.build:gradle-api:7.3.1")
+    implementation(kotlin("stdlib", version = "1.7.20"))
     val ga = gradleApi() // 暂没看出来有什么作用
     // print: " gradle 2api: null unspecified null "
     println("gradle api: ${ga.group} ${ga.name} ${ga.version}")
 }
 
 // dependencies {
-//     implementation("com.android.tools.build:gradle:7.2.0-rc01")
+//     implementation("com.android.tools.build:gradle:7.3.1")
 // }
