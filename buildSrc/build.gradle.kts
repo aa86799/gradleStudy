@@ -29,8 +29,6 @@ dependencies { // project 所需的 depends
     val ga = gradleApi() // 暂没看出来有什么作用
     // print: " gradle 2api: null unspecified null "
     println("gradle api: ${ga.group} ${ga.name} ${ga.version}")
-}
 
-// dependencies {
-//     implementation("com.android.tools.build:gradle:7.3.1")
-// }
+    implementation("org.ow2.asm:asm-commons:9.4")
+}

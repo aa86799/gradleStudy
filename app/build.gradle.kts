@@ -12,6 +12,8 @@ plugins {
 apply<CustomPlugin>()
 apply<gitversion.GitVersionPlugin>()
 
+apply<AsmTestPlugin>()
+
 android {
     compileSdk = 31
 

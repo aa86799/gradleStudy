@@ -22,8 +22,8 @@ abstract class ManifestTransformerTask: DefaultTask() {
       val gitVersion = gitInfoFile.get().asFile.readText()
       var manifest = mergedManifest.asFile.get().readText()
       manifest = manifest.replace(
-         "android:versionCode=\"1\"",
-         "android:versionCode=\"${gitVersion}\""
+         "android:versionName=\"1.0\"",
+         "android:versionName=\"${gitVersion}\""
       )
 
       // 先 get或先 asFile，都可以的，最终都是 File 对象

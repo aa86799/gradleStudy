@@ -6,7 +6,6 @@ import org.gradle.kotlin.dsl.register
 import java.io.File
 import com.android.build.api.variant.AndroidComponentsExtension
 import org.gradle.api.tasks.TaskProvider
-import org.gradle.kotlin.dsl.getByType
 import com.android.build.api.artifact.SingleArtifact
 
 class GitVersionPlugin: Plugin<Project> {
@@ -19,9 +18,7 @@ class GitVersionPlugin: Plugin<Project> {
             outputs.upToDateWhen { false } // 将 upToDateWhen 设置为 false，这样此 Task 前一次执行的输出就不会被复用
         }
 
-        val androidComponents = project.extensions.getByType(
-            AndroidComponentsExtension::class
-        )
+        val androidComponents = project.extensions.getByType(AndroidComponentsExtension::class.java)
         androidComponents.onVariants { variant ->
             // staging/debug/release ManifestUpdater,   $ ./gradlew :app:stagingManifestUpdater
             // 输出文件位置：app/build/intermediates/merged_manifest/staging/[build variant]ManifestUpdater/AndroidManifest.xml
